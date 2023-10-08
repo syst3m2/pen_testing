@@ -1,0 +1,6 @@
+#!python3
+
+def xor_two_str(a,b):
+    return ''.join([hex(ord(a[i%len(a)]) ^ ord(b[i%(len(b))]))[2:] for i in range(max(len(a), len(b)))])
+
+print xor_two_str("12ef","abcd")

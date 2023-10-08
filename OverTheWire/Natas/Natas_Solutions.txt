@@ -1,0 +1,82 @@
+. All passwords are also stored in /etc/natas_webpass/
+
+Level 0: gtVrDuiDfck831PqWsLEZy5gyDz1clto
+Level 1: ZluruAthQk7Q2MqmDeTiUij2ZvWy2mBi
+Level 2: ZluruAthQk7Q2MqmDeTiUij2ZvWy2mBi
+Level 3: sJIJNW6ucpu6HPZ1ZAchaDtwd7oGrD14
+	look at robots.txt
+Level 4: Z9tkRkWmpt9Qr7XrR5jWRkgOU901swEZ
+	Refresh page, Look at Firefox Network tab, double click on index.php (submits refresh page request) GET request
+	Click on Edit and Resend button on the right, change the referer to natas5 instead of natas4. Click send, then
+	click on the GET request again, look at "response" tab on top right and you will see password.
+Level 5: iX6IOfmpN7AYOQGPwtn3fXpbaJVJcHfq
+	Go to Storage tab, look at authentication cookie, double click on "Value" field, change to 1, refresh page
+Level 6: aGoY4q2Dc6MgDq4oL4YtoKtyAg9PeHa1
+	Go to source code, see that it requires include/secret.inc, put that file path in the url, view page source
+	Put that string into input secret for password
+Level 7: 7z3hEENjQtflzgnT29q7wAvMNfZdh0i9
+	Go to comments, gives you /etc/natas_webpass/natas8, copy and paste into page= AFTER index.php?. This lets 
+	you navigate outside out the web server directory
+Level 8: DBfUBfqQG69KvJvJ1iAbMoIpwSNQ9bWe
+	Look at source code, copy secret to cyberchef, convert from Hex, then reverse, then from Base64, copy into input box for password
+Level 9:W0mMhUcRRnG8dcghE4qvk3JA9lGt8nDl 
+	grep can search multiple files. Input into search bar to search for word with a /etc/natas_webpass/natas10
+	will return password. You can also input string; to end grep command, then cat /etc/natas_webpass/natas10
+Level 10: nOpp1igQAkUzaI1GUUjzn1bFVj7xCNzu
+	Look at source code, not actually filtering for slashes because those are part of the pregmatch function format
+	Put in c /etc/natas_webpass/natas11 to get password (uses grep to search files for words with c
+Level 11: U82q5TCMMQ9xuFoI3dYX61s7OZD9JKoK
+	Get data from cookie, go to writephponline.com
+	enter
+function xor_encrypt($in) {
+    $cookiedata = "ClVLIh4ASCsCBE8lAxMacFMZV2hdVVotEhhUJQNVAmhSEV4sFxFeaAw=";
+    $c_data = base64_decode($cookiedata);
+    $key = $c_data;
+    $text = $in;
+    $outText = '';
+
+    // Iterate through each character
+    for($i=0;$i<strlen($text);$i++) {
+    $outText .= $text[$i] ^ $key[$i % strlen($key)];
+    }
+
+    return $outText;
+}
+$defaultdata = array("showpassword"=>"no", "bgcolor"=>"#ffffff");
+$j_data = json_encode($defaultdata);
+echo xor_encrypt($j_data);
+
+Output is your key qw8Jqw8Jqw8Jqw8Jqw8Jqw8Jqw8Jqw8Jqw8Jqw8Jq
+
+end is weird, add repeating string on and write
+
+	function xor_encrypt($in) {
+    		$key = 'qw8Jqw8Jqw8Jqw8Jqw8Jqw8Jqw8Jqw8Jqw8Jqw8Jqw8J';
+    		$text = $in;
+    		$outText = '';
+
+    		// Iterate through each character
+    		for($i=0;$i<strlen($text);$i++) {
+    		$outText .= $text[$i] ^ $key[$i % strlen($key)];
+    		}
+
+    		return $outText;
+		}
+	$defaultdata = array("showpassword"=>"yes", "bgcolor"=>"#ffffff");
+	$j_data = json_encode($defaultdata);
+	echo base64_encode(xor_encrypt($j_data));
+
+	Take output "ClVLIh4ASCsCBE8lAxMacFMOXTlTWxooFhRXJh4FGnBTVF4sFxFeLFMK" and that will not be your new data, edit
+	cookie to put data in, reload page and you'll get password
+
+	So copy XOR encrypt function from source code, put data into cookiedata variable, change to decode base64 to work backwards
+	from what the source code did. Then json encode the array (default array) copied from their source code. Undoes their work to get you the
+	key, but it's not the full key just a portion of it. add last few characters, put into original code as key
+	change password field to yes and base64 encode again to get the input for the data field that shows
+	you have a password.
+
+Level 12: EDXp0pS26wLKHZy1rDBPUZk0RKfLGIR3
+
+"." " txt" "
+
+file.txt"; $pw = fopen("/etc/natas_webpass/natas12", "r"); $path = fread($pw, filesize("/etc/natas_webpass/natas12"));\

